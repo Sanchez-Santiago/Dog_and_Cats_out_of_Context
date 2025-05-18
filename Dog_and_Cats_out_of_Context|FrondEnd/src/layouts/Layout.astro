@@ -1,0 +1,73 @@
+---
+import NavBar from "../components/NavBar.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Como Perros y Gatos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barrio&family=Kirang+Haerang&family=Knewave&family=Modak&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <NavBar />
+    <main>
+      <div class="page-content">
+        <slot />
+      </div>
+    </main>
+    <Footer />
+  </body>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #1d2440;
+      color: white;
+      font-family: Instrument-sans, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    /* ========================================
+       Empujamos main para dejar hueco arriba y abajo
+       ======================================== */
+    main {
+      flex: 1;
+      padding-top: 8rem; /* altura de NavBar */
+      padding-bottom: 10rem; /* altura de Footer + margen */
+      box-sizing: border-box;
+      display: flex; /* activa Flexbox */
+      justify-content: center; /* centra horizontalmente */
+      align-items: flex-start; /* alinea el contenido arriba */
+    }
+
+    /* ========================================
+       Contenedor interior para width y centrado
+       ======================================== */
+    .page-content {
+      width: 100%;
+      max-width: 950px; /* o el max-width que quieras */
+      margin: 0 auto; /* centra si queda más estrecho */
+      padding: 0 1rem; /* un poco de relleno lateral */
+    }
+  </style>
+</html>

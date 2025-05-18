@@ -1,0 +1,158 @@
+<footer>
+  <div class="footer-container">
+    <div class="footer-section">
+      <h2>Contacto</h2>
+      <ul>
+        <li>
+          📸 <a
+            href="https://www.instagram.com/santiago_sanchez.24"
+            target="_blank"
+            rel="noopener noreferrer">Instagram</a
+          >
+        </li>
+        <li>
+          🌐 <a
+            href="https://portafolio-santiago-sanchez.netlify.app/es/"
+            target="_blank"
+            rel="noopener noreferrer">Portafolio</a
+          >
+        </li>
+        <li>
+          👨‍💻 <a
+            href="https://www.linkedin.com/in/santiago-sanchez-dev/"
+            target="_blank"
+            rel="noopener noreferrer">LinkedIn</a
+          >
+        </li>
+        <li>
+          💻 <a
+            href="https://github.com/Sanchez-Santiago"
+            target="_blank"
+            rel="noopener noreferrer">GitHub</a
+          >
+        </li>
+        <li>
+          ✉️ <a href="mailto:sanchez242018@gmail.com">sanchez242018@gmail.com</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h2>Enlaces</h2>
+      <ul>
+        <li>
+          <a
+            href="https://github.com/Sanchez-Santiago/Dog_and_Cats_out_of_Context"
+            target="_blank"
+            rel="noopener noreferrer">Como perro y Gatos GitHub</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://github.com/Sanchez-Santiago?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer">Otros Proyectos</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h2>Créditos</h2>
+      <p>
+        Desarrollado con
+        <a href="https://astro.build/" target="_blank" rel="noopener noreferrer"
+          >Astro</a
+        >,
+        <a
+          href="https://tailwindcss.com/"
+          target="_blank"
+          rel="noopener noreferrer">Tailwind CSS</a
+        > y
+        <a
+          href="https://www.netlify.com/"
+          target="_blank"
+          rel="noopener noreferrer">Netlify</a
+        >.
+      </p>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Santiago Sanchez. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: #d43a00;
+    color: #ffffff;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+  }
+
+  .footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 7rem;
+  }
+
+  .footer-section h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 0.25rem;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-section li {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-section a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+
+  .footer-section a:hover {
+    color: #ffeb3b;
+  }
+
+  .footer-section p {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .footer-section p a {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 600px) {
+    .footer-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .footer-section h2 {
+      font-size: 1.15rem;
+    }
+  }
+</style>
