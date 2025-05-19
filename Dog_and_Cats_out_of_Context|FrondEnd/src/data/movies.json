@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "title": "Perro persiguiendo su cola",
+      "category": "Perros",
+      "url": "https://www.youtube.com/embed/AkEa00_Dv2o",
+      "description": "Un perro juguetón tratando de atrapar su propia cola.",
+      "tags": ["perros", "juego", "divertido"]
+    },
+    {
+      "id": 2,
+      "title": "Gato saltando cajas",
+      "category": "Gatos",
+      "url": "https://www.youtube.com/embed/AkEa00_Dv2o",
+      "description": "Un gato demostrando sus habilidades de salto.",
+      "tags": ["gatos", "habilidades", "juego"]
+    },
+    {
+      "id": 3,
+      "title": "Perro y gato durmiendo juntos",
+      "category": "Perros y Gatos",
+      "url": "https://youtube.com/shorts/AkEa00_Dv2o?si=guZkVjJXWpEwYua8",
+      "description": "Un momento adorable entre un perro y un gato compartiendo una cama.",
+      "tags": ["perros", "gatos", "ternura", "amistad"]
+    }
+  ]
+  

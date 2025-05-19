@@ -38,9 +38,11 @@ import Footer from "../components/Footer.astro";
       height: 100%;
       background-color: #1d2440;
       color: white;
-      font-family: Instrument-sans, sans-serif;
       display: flex;
       flex-direction: column;
+      font-family: "Barrio", system-ui;
+      font-weight: 400;
+      font-style: normal;
     }
 
     body {
@@ -51,13 +53,13 @@ import Footer from "../components/Footer.astro";
        Empujamos main para dejar hueco arriba y abajo
        ======================================== */
     main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex: 1;
       padding-top: 8rem; /* altura de NavBar */
       padding-bottom: 10rem; /* altura de Footer + margen */
       box-sizing: border-box;
-      display: flex; /* activa Flexbox */
-      justify-content: center; /* centra horizontalmente */
-      align-items: flex-start; /* alinea el contenido arriba */
     }
 
     /* ========================================

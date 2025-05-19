@@ -1,0 +1,67 @@
+---
+import DogAndCat from "../components/DogAndCat.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <div class="content-container">
+    <h1>Welcome</h1>
+    <p>
+      ¡Bienvenido a 🐾Como Perros y Gatos🐾! Aquí encontrarás un rincón lleno de
+      ternura y diversión: videos de perritos, gatitos y otros animalitos que
+      alegrarán tu día. Navega, disfruta de sus ocurrencias y descubre momentos
+      inolvidables que te sacarán más de una sonrisa. Siéntete libre de explorar
+      nuestras categorías, compartir tus favoritos y dejarte contagiar por esa
+      energía positiva que solo ellos saben transmitir. Gracias por pasar por
+      aquí: ¡prepárate para llenar tu día de amor peludo!
+    </p>
+    <a href="/Home">
+      <button>Inicio</button>
+    </a>
+    <DogAndCat />
+  </div>
+
+  <style>
+    .content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #9b0800; /* Cambié el fondo para que contraste mejor */
+      width: 80%;
+      padding: 2rem;
+      box-sizing: border-box;
+      border-radius: 30px;
+      margin: 0 auto;
+      gap: 1.5rem; /* Espacio entre h1 y p */
+    }
+
+    .content-container h1 {
+      margin-bottom: 1rem;
+      font-size: 3rem;
+    }
+
+    .content-container p {
+      font-family: "Knewave", system-ui;
+      font-weight: 400;
+      font-style: normal;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .content-container button {
+      background-color: #f69a0b;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      border: none;
+      font-size: 1.2rem;
+      font-family: "Knewave", system-ui;
+      font-weight: 400;
+      font-style: normal;
+    }
+    .content-container button:hover {
+      background-color: #d43a00;
+    }
+  </style>
+</Layout>

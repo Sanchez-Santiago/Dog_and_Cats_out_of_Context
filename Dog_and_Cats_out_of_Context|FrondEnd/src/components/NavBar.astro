@@ -1,8 +1,9 @@
 <nav class="nav">
-  <h1>🐶Como Perros y Gatos🐱</h1>
+  <h1><a href="/Home">🐶Como Perros y Gatos🐱</a></h1>
+
   <ul class="nav-list">
-    <li><a href="/">Me Gusta</a></li>
-    <li><a href="/about">Favoritos</a></li>
+    <li><a href="/Like">Me Gusta</a></li>
+    <li><a href="/Favorites">Favoritos</a></li>
 
     <li class="dropdown">
       <!-- Ícono “hamburger” -->
@@ -16,9 +17,9 @@
 
       <!-- Contenido oculto por defecto -->
       <ul class="dropdown-content">
-        <li><a href="/item1">Opción 1</a></li>
-        <li><a href="/item2">Opción 2</a></li>
-        <li><a href="/item3">Opción 3</a></li>
+        <li><a href="/item1">Perfil</a></li>
+        <li><a href="/item2">Configuracion</a></li>
+        <li><a href="/item3">Cerra Secion</a></li>
       </ul>
     </li>
   </ul>
@@ -67,6 +68,11 @@
     margin: 0;
     font-size: 1.25rem;
   }
+  .nav h1 a {
+    font-size: 2rem;
+    text-decoration: none; /* Quita la línea */
+    color: inherit; /* Mantiene el color del h1 */
+  }
 
   .nav-list {
     list-style: none;
@@ -78,6 +84,7 @@
   }
 
   .nav-list a {
+    font-size: 1.5rem;
     text-decoration: none;
     color: black;
     padding: 0.5rem 0.75rem;
