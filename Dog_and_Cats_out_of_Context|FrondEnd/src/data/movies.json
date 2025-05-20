@@ -1,27 +1,50 @@
 [
-    {
-      "id": 1,
-      "title": "Perro persiguiendo su cola",
-      "category": "Perros",
-      "url": "https://www.youtube.com/embed/AkEa00_Dv2o",
-      "description": "Un perro juguetón tratando de atrapar su propia cola.",
-      "tags": ["perros", "juego", "divertido"]
-    },
-    {
-      "id": 2,
-      "title": "Gato saltando cajas",
-      "category": "Gatos",
-      "url": "https://www.youtube.com/embed/AkEa00_Dv2o",
-      "description": "Un gato demostrando sus habilidades de salto.",
-      "tags": ["gatos", "habilidades", "juego"]
-    },
-    {
-      "id": 3,
-      "title": "Perro y gato durmiendo juntos",
-      "category": "Perros y Gatos",
-      "url": "https://youtube.com/shorts/AkEa00_Dv2o?si=guZkVjJXWpEwYua8",
-      "description": "Un momento adorable entre un perro y un gato compartiendo una cama.",
-      "tags": ["perros", "gatos", "ternura", "amistad"]
-    }
-  ]
-  
+  {
+    "id": 1,
+    "title": "Perro persiguiendo su cola",
+    "category": "Perros",
+    "url": "https://www.youtube.com/embed/AkEa00_Dv2o",
+    "description": "Un perro adorable intentando atrapar su propia cola en un divertido ciclo sin fin.",
+    "tags": ["perros", "divertido", "travieso", "juguetón"]
+  },
+  {
+    "id": 2,
+    "title": "Gato saltando cajas",
+    "category": "Gatos",
+    "url": "https://youtube.com/embed/gLExzdviu0k?si=-Jz6PhLAw-o_5Rkg",
+    "description": "Un gato ágil que demuestra su destreza al saltar sobre varias cajas apiladas.",
+    "tags": ["gatos", "acrobacia", "saltos", "habilidoso"]
+  },
+  {
+    "id": 3,
+    "title": "Perro y gato acurrucados durmiendo",
+    "category": "Perros y Gatos",
+    "url": "https://youtube.com/embed/j8jVnyXYKcU?si=P8IlDaTIdmsw2OcX",
+    "description": "Un tierno momento en el que un perro y un gato se acurrucan y duermen juntos en perfecta armonía.",
+    "tags": ["perros", "gatos", "ternura", "amistad", "dulcesueños"]
+  },
+  {
+    "id": 4,
+    "title": "Perro y gato compartiendo la siesta",
+    "category": "Perros y Gatos",
+    "url": "https://youtube.com/embed/JdIPHhjevLQ?si=S5sY78foIoYPobfL",
+    "description": "Un perro y un gato recostados lado a lado, disfrutando de una siesta bajo el sol.",
+    "tags": ["perros", "gatos", "siesta", "amistad", "relajación"]
+  },
+  {
+    "id": 5,
+    "title": "Perrito y gatito durmiendo espalda con espalda",
+    "category": "Perros y Gatos",
+    "url": "https://youtube.com/embed/34oqT0VpTLE?si=pyXrF4gjiB-Oijb3",
+    "description": "Un perrito y un gatito descansando espalda con espalda, demostrando que la amistad no entiende de especies.",
+    "tags": ["perros", "gatos", "amistad", "descanso", "dulzura"]
+  },
+  {
+    "id": 6,
+    "title": "Amistad felina y canina descansando juntos",
+    "category": "Perros y Gatos",
+    "url": "https://youtube.com/embed/xPJBCWZromo?si=R08tXkbHU2wORoTx",
+    "description": "Un perro y un gato compartiendo un momento de tranquilidad en el sofá, mostrando su unión inquebrantable.",
+    "tags": ["perros", "gatos", "amistad", "tranquilidad", "confort"]
+  }
+]
