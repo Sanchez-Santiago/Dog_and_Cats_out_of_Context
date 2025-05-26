@@ -2,8 +2,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mysql from 'mysql2/promise'; // ✅ correcta
-import router from './router/movieRouter.js';
+import movieRouter from './router/movieRouter.js'
+import userRouter from './router/userRouter.js'
 import { MovieModelMySQL } from './model/movieModelMySQL.js';
+import { UserModelMySQL } from './model/userModelMySQL.js';
 
 dotenv.config({ path: '.env' });
 
@@ -21,20 +23,15 @@ async function start() {
       port: process.env.DB_PORT
     });
 
-    try {
-      const connectionCloudinary = await mysql.createConnection({
-        cloud_name: process.env.CLOUDINARY_NAME,
-        api_key: process.env.CLOUDINARY_KEY,
-        api_secret: process.env.CLOUDINARY_SECRET,
-      });
-
     const MovieModel = new MovieModelMySQL({ connection });
+    const UserModel = new UserModelMySQL({ connection });
 
     app.get('/', (req, res) => {
       res.send('Hola mundo');
     });
 
-    app.use('/api', router({ MovieModel , connectionCloudinary }));
+    app.use('/api/movie', movieRouter({ MovieModel, connection }));
+    app.use('/api/user', userRouter({ UserModel }));
 
     const PORT = process.env.PORT ?? 1234;
     app.listen(PORT, () => {
@@ -43,9 +40,7 @@ async function start() {
   } catch (err) {
     console.error('❌ Error al iniciar el servidor:', err);
   }
-} catch (err) {
-  console.error('❌ Error al iniciar el servidor:', err);
 }
-}
+
 
 start(); // 👈 Ahora sí

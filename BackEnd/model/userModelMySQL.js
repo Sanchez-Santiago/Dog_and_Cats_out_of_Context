@@ -1,5 +1,4 @@
-import mysql from 'mysql2/promise';
-
+// models/userModelMySQL.js
 export class UserModelMySQL {
     constructor({ connection }) {
         this.connection = connection;  // Aquí guardas el objeto connection

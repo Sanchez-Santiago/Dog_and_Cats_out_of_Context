@@ -4,12 +4,12 @@ const movieRouter = ({ MovieModel, connectionCloudinary }) => {
     const router = Router();
     const movieController = new MovieController({ MovieModel , connectionCloudinary });
   
-    router.get("/movie", movieController.getAll);
-    router.get("/movie/name", movieController.getName);
-    router.get("/movie/:id", movieController.getById);
-    router.post("/movie", movieController.create);
-    router.put("/movie/:id", movieController.update);
-    router.delete("/movie/:id", movieController.delete);
+    router.get("/", movieController.getAll);
+    router.get("/name/:name", movieController.getName);
+    router.get("/:id", movieController.getById);
+    router.post("/", movieController.create);
+    router.put("/:id", movieController.update);
+    router.delete("/:id", movieController.delete);
   
     return router;
   };
