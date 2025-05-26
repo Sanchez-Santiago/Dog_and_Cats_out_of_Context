@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { MovieController } from '../controller/movieController.js';
-const movieRouter = ({ MovieModel }) => {
+const movieRouter = ({ MovieModel, connectionCloudinary }) => {
     const router = Router();
-    const movieController = new MovieController({ MovieModel });
+    const movieController = new MovieController({ MovieModel , connectionCloudinary });
   
     router.get("/movie", movieController.getAll);
     router.get("/movie/name", movieController.getName);
