@@ -1,21 +1,20 @@
-// schemas/movies.js
 import { z } from 'zod';
 
 const movieSchema = z.object({
-  title: z.string().max(75),
-  date: z.string()
+  name: z.string().max(60), // 'title' → 'name'
+  fecha: z.string()
     .refine(val => !isNaN(Date.parse(val)), {
       message: "Invalid date"
     })
-    .transform(val => new Date(val)),
+    .transform(val => new Date(val)), // sigue siendo útil
   description: z.string().max(700),
-  duration: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
-    message: "Duration must be in HH:mm format"
+  duration: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/, {
+    message: "Duration must be in HH:mm or HH:mm:ss format"
   }),
-  likes: z.number().int().min(0),
-  notLikes: z.number().int().min(0),
+  likes: z.number().int().min(0).optional(),
+  dislikes: z.number().int().min(0).optional(), // 'notLikes' → 'dislikes'
   movie: z.string().url({ message: 'Movie must be a valid URL' }),
-  user: z.string().uuid()
+  user_id: z.string().uuid() // 'user' → 'user_id'
 });
 
 export function validateMovie(object) {

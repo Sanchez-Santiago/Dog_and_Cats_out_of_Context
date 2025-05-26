@@ -29,9 +29,13 @@ export class MovieModelMySQL {
 
   getName = async ({ name }) => {
     const sql = 'SELECT * FROM movie WHERE name LIKE ?';
-    const [rows] = await this.connection.execute(sql, [`%${name}%`]);
+    const pattern = `%${name}%`;
+    console.log('>> SQL ejecutado en el modelo:', sql, '— parámetros:', [pattern]);
+
+    const [rows] = await this.connection.execute(sql, [pattern]);
     return rows;
   };
+  
 
   getMovieById = async ({ id }) => {
     const sql = 'SELECT * FROM movie WHERE idmovie = ?';
