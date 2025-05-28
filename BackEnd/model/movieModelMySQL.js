@@ -35,7 +35,6 @@ export class MovieModelMySQL {
     const [rows] = await this.connection.execute(sql, [pattern]);
     return rows;
   };
-  
 
   getMovieById = async ({ id }) => {
     const sql = 'SELECT * FROM movie WHERE idmovie = ?';
@@ -44,18 +43,43 @@ export class MovieModelMySQL {
   };
 
   addMovie = async ({ input }) => {
+    const keys = [
+      'name',
+      'fecha',
+      'description',
+      'duration',
+      'likes',
+      'dislikes',
+      'movie',
+      'user_id',
+      'genre',
+      'cloudinary_public_id'
+    ];
+  
+    // Forzamos null en los campos que no vengan definidos
+    const sanitized = {};
+    for (const key of keys) {
+      sanitized[key] = input[key] !== undefined ? input[key] : null;
+    }
+  
     const sql = `
-      INSERT INTO movie (name, genre, movie, cloudinary_public_id)
-      VALUES (?, ?, ?, ?)
-    `;
-    const [result] = await this.connection.execute(sql, [
-      input.name,
-      input.genre,
-      input.movie,
-      input.cloudinary_public_id,
-    ]);
-    return { id: result.insertId, ...input };
+    INSERT INTO movie (name, fecha, description, duration, likes, dislikes, movie, user_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+  const [result] = await this.connection.execute(sql, [
+    sanitized.name,
+    sanitized.fecha,
+    sanitized.description,
+    sanitized.duration,
+    sanitized.likes,
+    sanitized.dislikes,
+    sanitized.movie,
+    sanitized.user_id
+  ]);
+  
+  
+    return { id: result.insertId, ...sanitized };
   };
+  
 
   updateMovie = async ({ id, input }) => {
     const fields = [];

@@ -1,6 +1,5 @@
-// controllers/MovieController.js
 import { validateMovie, validatePartialMovie } from '../schemas/movies.js';
-import cloudinary from '../services/cloudinary.js';
+import cloudinary, { uploadFromBuffer } from '../services/cloudinary.js';
 
 export class MovieController {
   constructor({ MovieModel }) {
@@ -35,10 +34,8 @@ export class MovieController {
 
   getName = async (req, res) => {
     try {
-      const { name } = req.params;              // ← antes estabas usando req.query
-      console.log('>> getName recibido en controlador:', name);
-
-      const movies = await this.MovieModel.getName({ name });  // ← invocar método del modelo
+      const { name } = req.params;
+      const movies = await this.MovieModel.getName({ name });
       res.json(movies);
     } catch (error) {
       console.error('Error al obtener las películas por nombre:', error);
@@ -47,50 +44,50 @@ export class MovieController {
   };
 
   create = async (req, res) => {
+    const newMovieData = {
+      name: 'Movie name',
+      description: 'Movie description',
+      duration: 10,
+      likes: 0,
+      dislikes: 0,
+      user_id: 1,
+    };
     try {
       const { file, body } = req;
-
-      // 1. Validar que haya un archivo
+  
       if (!file) {
         return res.status(400).json({ error: 'Movie file is required' });
       }
-
-      // 2. Validar los campos del body con Zod
-      //    Nota: 'body' contiene todos los campos salvo el archivo
-      //    Tu esquema espera: name, fecha, description, duration, likes?, dislikes?, movie, user_id
-      //    Aquí hacemos un safeParse provisional quitando 'movie' porque primero subiremos el archivo.
+  
       const provisionalData = {
         ...body,
-        movie: 'https://placeholder.url', // temporalmente válido para que Zod no falle
+        movie: 'https://placeholder.url',
       };
+  
       const result = validateMovie(provisionalData);
-
+  
       if (!result.success) {
         return res.status(400).json(result.error.format());
       }
-
-      // 3. Subir el archivo a Cloudinary
-      const uploadResult = await cloudinary.uploader.upload(file.path, {
-        resource_type: 'auto',
-      });
-
-      // 4. Armar el objeto final para guardar en BD, usando la URL y el public_id
+  
+      // Usar uploadFromBuffer en lugar de upload con file.path
+      const uploadResult = await uploadFromBuffer(file.buffer);
+  
       const newMovieData = {
         ...result.data,
         movie: uploadResult.secure_url,
         cloudinary_public_id: uploadResult.public_id,
       };
-
-      // 5. Llamar al modelo para insertar en la tabla 'movie'
+  
       const created = await this.MovieModel.addMovie({ input: newMovieData });
-
+  
       return res.status(201).json(created);
     } catch (error) {
       console.error('Error al crear la película:', error);
       return res.status(500).json({ error: 'Error al crear la película' });
     }
   };
-
+  
   update = async (req, res) => {
     try {
       const validation = validatePartialMovie(req.body);
@@ -116,13 +113,11 @@ export class MovieController {
     try {
       const { id } = req.params;
 
-      // 1. Obtener la película para extraer el public_id
       const movie = await this.MovieModel.getMovieById({ id });
       if (!movie) {
         return res.status(404).json({ error: 'Película no encontrada' });
       }
 
-      // 2. Si existe public_id, eliminar el archivo en Cloudinary
       const publicId = movie.cloudinary_public_id;
       if (publicId) {
         await cloudinary.uploader.destroy(publicId, {
@@ -131,7 +126,6 @@ export class MovieController {
         });
       }
 
-      // 3. Eliminar el registro de la película en la base de datos
       const deleted = await this.MovieModel.deleteMovie({ id });
       if (!deleted) {
         return res.status(404).json({ error: 'Película no encontrada' });

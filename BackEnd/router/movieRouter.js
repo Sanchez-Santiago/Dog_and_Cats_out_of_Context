@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { MovieController } from '../controller/movieController.js';
-import { upload } from '../middlewares/multer.js';
+import upload  from '../middlewares/multer.js';
 
 const movieRouter = ({ MovieModel, connectionCloudinary }) => {
     const router = Router();
