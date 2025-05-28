@@ -1,6 +1,7 @@
 // models/MovieModelMySQL.js
+import { connection } from '../db/MySQL.js';
 export class MovieModelMySQL {
-  constructor({ connection }) {
+  constructor() {
     this.connection = connection;
   }
 
@@ -65,7 +66,7 @@ export class MovieModelMySQL {
     const sql = `
     INSERT INTO movie (name, fecha, description, duration, likes, dislikes, movie, user_id)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-    
+
   const [result] = await this.connection.execute(sql, [
     sanitized.name,
     sanitized.fecha,

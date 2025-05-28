@@ -1,6 +1,7 @@
 // models/userModelMySQL.js
+import { connection } from '../db/MySQL.js';
 export class UserModelMySQL {
-    constructor({ connection }) {
+    constructor() {
         this.connection = connection;  // Aquí guardas el objeto connection
     }
 

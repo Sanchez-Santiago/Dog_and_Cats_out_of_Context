@@ -1,13 +1,9 @@
 // index.js o app.js
 import express from 'express';
-import dotenv from 'dotenv';
-import mysql from 'mysql2/promise'; // ✅ correcta
 import movieRouter from './router/movieRouter.js'
 import userRouter from './router/userRouter.js'
 import { MovieModelMySQL } from './model/movieModelMySQL.js';
 import { UserModelMySQL } from './model/userModelMySQL.js';
-
-dotenv.config({ path: '.env' });
 
 const app = express();
 app.use(express.json());
@@ -15,22 +11,14 @@ app.disable('x-powered-by');
 
 async function start() {
   try {
-    const connection = await mysql.createConnection({
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      port: process.env.DB_PORT
-    });
-
-    const MovieModel = new MovieModelMySQL({ connection });
-    const UserModel = new UserModelMySQL({ connection });
+    const MovieModel = new MovieModelMySQL();
+    const UserModel = new UserModelMySQL();
 
     app.get('/', (req, res) => {
       res.send('Hola mundo');
     });
 
-    app.use('/api/movie', movieRouter({ MovieModel, connection }));
+    app.use('/api/movie', movieRouter({ MovieModel }));
     app.use('/api/user', userRouter({ UserModel }));
 
     const PORT = process.env.PORT ?? 1234;
