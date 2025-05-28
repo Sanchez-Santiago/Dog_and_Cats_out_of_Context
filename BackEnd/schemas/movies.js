@@ -7,7 +7,7 @@ const movieSchema = z.object({
       message: "Invalid date"
     })
     .transform(val => new Date(val)), // sigue siendo útil
-  description: z.string().max(700).default(null),
+  description: z.string().max(700).default(null).optional().nullable(),
   duration: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/, {
     message: "Duration must be in HH:mm or HH:mm:ss format"
   }),

@@ -84,6 +84,20 @@ export class MovieController {
       return res.status(201).json(created);
     } catch (error) {
       console.error('Error al crear la película:', error);
+
+    // Si vino un archivo subido a Cloudinary y falló la creación se elimina de cloudinary
+    const publicId = req.body?.cloudinary_public_id;
+    if (publicId) {
+      try {
+        await cloudinary.uploader.destroy(publicId, {
+          resource_type: 'auto',
+          invalidate: true,
+        });
+        console.log(`Imagen ${publicId} eliminada de Cloudinary por error de base de datos.`);
+      } catch (cloudError) {
+        console.error('Error al eliminar imagen de Cloudinary:', cloudError);
+      }
+    }
       return res.status(500).json({ error: 'Error al crear la película' });
     }
   };

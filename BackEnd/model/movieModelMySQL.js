@@ -65,6 +65,7 @@ export class MovieModelMySQL {
     const sql = `
     INSERT INTO movie (name, fecha, description, duration, likes, dislikes, movie, user_id)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    
   const [result] = await this.connection.execute(sql, [
     sanitized.name,
     sanitized.fecha,
