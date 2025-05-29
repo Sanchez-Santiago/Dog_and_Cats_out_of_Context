@@ -5,37 +5,50 @@ export class MovieModelMySQL {
     this.connection = connection;
   }
 
-  getAllMovies = async ({ genre, name } = {}) => {
+  getAllMovies = async ({ genre, name, page = 1 } = {}) => {
     let sql = 'SELECT * FROM movie';
     const params = [];
-
-    if (genre || name) {
-      sql += ' WHERE';
-      if (genre) {
-        sql += ' genre = ?';
-        params.push(genre);
-      }
-      if (genre && name) {
-        sql += ' AND';
-      }
-      if (name) {
-        sql += ' name LIKE ?';
-        params.push(`%${name}%`);
-      }
+  
+    const conditions = [];
+  
+    if (genre) {
+      conditions.push('genre = ?');
+      params.push(genre);
     }
-
+  
+    if (name) {
+      conditions.push('name LIKE ?');
+      params.push(`%${name}%`);
+    }
+  
+    if (conditions.length > 0) {
+      sql += ' WHERE ' + conditions.join(' AND ');
+    }
+  
+    const limit = 5;
+    const offset = (page - 1) * limit;
+  
+    sql += ' LIMIT ? OFFSET ?';
+    params.push(limit, offset);
+  
     const [rows] = await this.connection.execute(sql, params);
     return rows;
   };
+  
 
-  getName = async ({ name }) => {
-    const sql = 'SELECT * FROM movie WHERE name LIKE ?';
+  getName = async ({ name, page = 1 }) => {
+    const limit = 5;
+    const offset = (page - 1) * limit;
+  
+    const sql = 'SELECT * FROM movie WHERE name LIKE ? LIMIT ? OFFSET ?';
     const pattern = `%${name}%`;
-    console.log('>> SQL ejecutado en el modelo:', sql, '— parámetros:', [pattern]);
-
-    const [rows] = await this.connection.execute(sql, [pattern]);
+  
+    console.log('>> SQL ejecutado en el modelo:', sql, '— parámetros:', [pattern, limit, offset]);
+  
+    const [rows] = await this.connection.execute(sql, [pattern, limit, offset]);
     return rows;
   };
+  
 
   getMovieById = async ({ id }) => {
     const sql = 'SELECT * FROM movie WHERE idmovie = ?';
