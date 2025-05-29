@@ -8,9 +8,12 @@ export class MovieController {
 
   getAll = async (req, res) => {
     try {
-      const { genre, name } = req.query;
-      const movies = await this.MovieModel.getAllMovies({ genre, name });
-      res.json(movies);
+      const page = parseInt(req.query.page) || 1;
+      const name = req.query.name || '';
+      const genre = req.query.genre || '';
+
+      const results = await this.MovieModel.getAllMovies({ name, genre, page });
+      res.json(results);
     } catch (error) {
       console.error('Error al obtener las películas:', error);
       res.status(500).json({ error: 'Error al obtener las películas' });
@@ -44,64 +47,56 @@ export class MovieController {
   };
 
   create = async (req, res) => {
-    const newMovieData = {
-      name: 'Movie name',
-      description: 'Movie description',
-      duration: 10,
-      likes: 0,
-      dislikes: 0,
-      user_id: 1,
-    };
     try {
       const { file, body } = req;
-  
+
       if (!file) {
-        return res.status(400).json({ error: 'Movie file is required' });
+        return res.status(400).json({ error: 'Se requiere un archivo de película' });
       }
-  
+
       const provisionalData = {
         ...body,
-        movie: 'https://placeholder.url',
+        movie: 'https://placeholder.url', // necesario para pasar la validación
       };
-  
+
       const result = validateMovie(provisionalData);
-  
+
       if (!result.success) {
         return res.status(400).json(result.error.format());
       }
-  
-      // Usar uploadFromBuffer en lugar de upload con file.path
+
+      // Subir el archivo a Cloudinary
       const uploadResult = await uploadFromBuffer(file.buffer);
-  
+
       const newMovieData = {
         ...result.data,
         movie: uploadResult.secure_url,
         cloudinary_public_id: uploadResult.public_id,
       };
-  
+
       const created = await this.MovieModel.addMovie({ input: newMovieData });
-  
+
       return res.status(201).json(created);
     } catch (error) {
       console.error('Error al crear la película:', error);
 
-    // Si vino un archivo subido a Cloudinary y falló la creación se elimina de cloudinary
-    const publicId = req.body?.cloudinary_public_id;
-    if (publicId) {
-      try {
-        await cloudinary.uploader.destroy(publicId, {
-          resource_type: 'auto',
-          invalidate: true,
-        });
-        console.log(`Imagen ${publicId} eliminada de Cloudinary por error de base de datos.`);
-      } catch (cloudError) {
-        console.error('Error al eliminar imagen de Cloudinary:', cloudError);
+      const publicId = req.body?.cloudinary_public_id;
+      if (publicId) {
+        try {
+          await cloudinary.uploader.destroy(publicId, {
+            resource_type: 'auto',
+            invalidate: true,
+          });
+          console.log(`Imagen ${publicId} eliminada de Cloudinary por error de base de datos.`);
+        } catch (cloudError) {
+          console.error('Error al eliminar imagen de Cloudinary:', cloudError);
+        }
       }
-    }
+
       return res.status(500).json({ error: 'Error al crear la película' });
     }
   };
-  
+
   update = async (req, res) => {
     try {
       const validation = validatePartialMovie(req.body);

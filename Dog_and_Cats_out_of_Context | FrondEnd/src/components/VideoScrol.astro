@@ -1,32 +1,23 @@
 ---
-import type { Movie } from "../lib/movie";
 const { videoList } = Astro.props;
-
 let random = Math.floor(Math.random() * videoList.length);
-console.log(random);
-let video = videoList[random];
+let video = videoList[random]; // En el video: // idmovie -> id // name -> title
+// movie -> url // description -> description // No hay tags
 ---
 
 <div class="video-container">
-  <div class="video-item" data-id={video.id}>
-    <h2>{video.title}</h2>
-    <iframe
+  <div class="video-item" data-id={video.idmovie}>
+    <h2>{video.name}</h2>
+    <video
       class="video-player"
       width="560"
       height="315"
-      src={video.url}
-      title={video.title}
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen></iframe>
+      controls
+      src={video.movie}
+      title={video.name}></video>
     <p>{video.description}</p>
     <div class="tags">
-      {
-        /* <p>{video.tags}</p> */
-        video.tags.map((tag: string) => {
-          return <p class="tag">{tag}</p>;
-        })
-      }
+      {/* No hay tags en este formato */}
     </div>
   </div>
 </div>

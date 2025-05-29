@@ -1,10 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import movies from "../data/movies.json";
 import type { Movie } from "../lib/movie";
 import VideoScrol from "../components/VideoScrol.astro";
 
-const videoList: Movie[] = movies;
+// Cambiá la URL por la de tu backend:
+const res = await fetch("http://localhost:1234/api/movie"); // o la ruta correcta
+if (!res.ok) throw new Error("Error al obtener las películas");
+
+const videoList: Movie[] = await res.json();
 ---
 
 <Layout>
